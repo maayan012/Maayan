@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="he" dir="rtl">
 <head>
   <meta charset="UTF-8" />
@@ -281,12 +281,15 @@
       margin-top: 1.1rem;
     }
     .cta a{
-      display:block;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.65rem;
       width:100%;
       text-decoration:none;
       text-align:center;
       padding: 1rem 1.05rem;
-      border-radius: 18px;
+      border-radius: 999px;
       background: rgba(255,255,255,0.24);
       border: 1px solid rgba(255,255,255,0.40);
       box-shadow: var(--shadow);
@@ -301,10 +304,25 @@
       background: rgba(255,255,255,0.30);
       box-shadow: var(--shadow-hover);
     }
+    .cta .cta-ic{
+      width:22px;height:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+    }
+    .cta .cta-ic svg{width:14px;height:14px;fill:#fff;display:block;}
 
-    /* Contact line (clean, no icons) */
+    /* Contact line (with icons) */
     .contact-line{
       margin-top: 1.2rem;
+      display:flex;
+      justify-content:center;
+      gap:.9rem;
+      flex-wrap:wrap;
+      align-items:center;
       text-align:center;
       color: rgba(255,255,255,0.9);
       font-weight:300;
@@ -316,6 +334,13 @@
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
     }
+    .contact-line .c-item{
+      display:flex;
+      align-items:center;
+      gap:.45rem;
+      color:#fff;
+    }
+    .contact-line svg{width:16px;height:16px;fill:#fff;display:block;opacity:.95;}
     .contact-line a{ color:#fff; text-decoration:underline; }
 
     footer{
@@ -352,7 +377,7 @@
         <svg viewBox="0 0 24 24"><path d="M7.5 2C4.46 2 2 4.46 2 7.5V16.5C2 19.54 4.46 22 7.5 22H16.5C19.54 22 22 19.54 22 16.5V7.5C22 4.46 19.54 2 16.5 2H7.5ZM12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7ZM18 5.5C18.83 5.5 19.5 6.17 19.5 7C19.5 7.83 18.83 8.5 18 8.5C17.17 8.5 16.5 7.83 16.5 7C16.5 6.17 17.17 5.5 18 5.5Z"/></svg>
       </a>
 
-      <a href="https://www.facebook.com/maayan.shalom.2025" target="_blank" rel="noopener" aria-label="Facebook">
+      <a href="https://www.facebook.com/profile.php?id=61576235122754&notif_id=1765562414726162&notif_t=page_user_activity&ref=notif#" target="_blank" rel="noopener" aria-label="Facebook">
         <svg viewBox="0 0 24 24"><path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12C2 17 5.66 21.1 10.44 21.88V14.89H7.9V12H10.44V9.79C10.44 7.29 11.93 5.93 14.12 5.93C15.18 5.93 16.29 6.12 16.29 6.12V8.59H15.09C13.9 8.59 13.55 9.28 13.55 10V12H16.18L15.77 14.89H13.55V21.88C18.34 21.1 22 17 22 12Z"/></svg>
       </a>
     </div>
@@ -550,6 +575,27 @@
           <span class="card-text"><div class="title">מדריך HeyGen, יצירת פרזנטור וידאו ב-AI</div></span>
         </a>
       </div>
+
+      <div class="cta">
+        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">
+          <span class="cta-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/></svg>
+          </span>
+          לתיאום
+        </a>
+      </div>
+
+      <div class="contact-line">
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
+          <a href="tel:+972543675502">0543675502</a>
+        </div>
+        <span>|</span>
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
+        </div>
+      </div>
     </section>
 
     <!-- Panel: Courses -->
@@ -557,8 +603,8 @@
       <h3 class="section-title">קורסים והרצאות</h3>
 
       <div class="accordion" id="accordion">
-        <div class="acc-item open">
-          <button class="acc-btn" type="button" aria-expanded="true">
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">
             <div class="acc-head">
               <div class="acc-title">AI MASTERY</div>
               <div class="acc-subtitle">שליטה מעשית בכלי AI לעבודה היומיומית</div>
@@ -610,11 +656,24 @@
       </div>
 
       <div class="cta">
-        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">לתיאום קורס או הרצאה</a>
+        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">
+          <span class="cta-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/></svg>
+          </span>
+          לתיאום
+        </a>
       </div>
 
       <div class="contact-line">
-        טלפון: 0543675502 | מייל: <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
+          <a href="tel:+972543675502">0543675502</a>
+        </div>
+        <span>|</span>
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
+        </div>
       </div>
     </section>
 
@@ -648,30 +707,20 @@
       btn.addEventListener('click', () => activateTab(btn.dataset.target));
     });
 
-    // Accordion (only one open at a time)
+    // Accordion (toggle each independently, default all closed)
     const accItems = document.querySelectorAll('.acc-item');
-
-    function openItem(itemToOpen){
-      accItems.forEach(item => {
-        const isTarget = item === itemToOpen;
-        item.classList.toggle('open', isTarget);
-        const btn = item.querySelector('.acc-btn');
-        if(btn) btn.setAttribute('aria-expanded', isTarget ? 'true' : 'false');
-      });
-    }
 
     accItems.forEach(item => {
       const btn = item.querySelector('.acc-btn');
       btn.addEventListener('click', () => {
-        // If clicking the already-open item, keep it open (יציב וברור)
-        if(item.classList.contains('open')) return;
-        openItem(item);
+        const willOpen = !item.classList.contains('open');
+        item.classList.toggle('open', willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
       });
     });
 
     // Default state
     activateTab('panel-tools'); // ברירת מחדל: כלים ומדריכים
-    openItem(accItems[0]);      // כרטיס אחד פתוח בכל פעם בטאב קורסים
   </script>
 </body>
 </html>
