@@ -1,222 +1,726 @@
-<!DOCTYPE html>
+<!DOCTYPE html> 
 <html lang="he" dir="rtl">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>מעיין שלום | Maayan Shalom – AI & Creativity</title>
   <link href="https://fonts.googleapis.com/css2?family=Heebo:wght@300;400;500;700&display=swap" rel="stylesheet">
+
   <style>
-    :root {
-      --gradient-start:#30a9ff; /* כחול */
-      --gradient-end:#7f00ff;   /* סגול */
-      --button-text:var(--gradient-start); /* טקסט כפתורים – כחול */
+    :root{
+      --gradient-start:#30a9ff;
+      --gradient-end:#7f00ff;
+
+      --glass-bg: rgba(255,255,255,0.16);
+      --glass-border: rgba(255,255,255,0.35);
+      --glass-bg-hover: rgba(255,255,255,0.24);
+
+      --shadow: 0 10px 28px rgba(0,0,0,0.18);
+      --shadow-hover: 0 14px 34px rgba(0,0,0,0.24);
+
+      --text:#ffffff;
+      --muted: rgba(255,255,255,0.86);
     }
 
     *{margin:0;padding:0;box-sizing:border-box;font-family:'Heebo',sans-serif;}
-    body{display:flex;flex-direction:column;align-items:center;min-height:100vh;padding:2rem 1rem;background:linear-gradient(135deg,var(--gradient-start) 0%,var(--gradient-end) 100%);color:#fff;text-align:center;}
+    body{
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+      align-items:center;
+      padding:2rem 1rem;
+      background:linear-gradient(135deg,var(--gradient-start) 0%,var(--gradient-end) 100%);
+      color:var(--text);
+      text-align:center;
+    }
 
-    .profile-img{width:128px;height:128px;border-radius:50%;object-fit:cover;border:4px solid #fff;margin-bottom:1rem;}
+    .container{
+      width:100%;
+      max-width:560px;
+    }
 
-    h1{font-size:1.6rem;margin-bottom:0.25rem;}
-    h2{font-size:1.05rem;font-weight:300;margin-bottom:1.2rem;opacity:0.9;line-height:1.4;}
+    .profile-img{
+      width:128px;height:128px;border-radius:50%;
+      object-fit:cover;border:4px solid #fff;
+      margin:0 auto 1rem;
+      display:block;
+    }
 
-    /* ======== TOP SOCIAL ICONS ======== */
-    .social-icons{display:flex;gap:1rem;margin-bottom:1.8rem;}
-    .social-icons a{display:flex;align-items:center;justify-content:center;width:42px;height:42px;border:2px solid #fff;border-radius:50%;color:#fff;transition:transform 0.15s,opacity 0.15s,background 0.15s;}
-    .social-icons a:hover{transform:scale(1.1);opacity:0.9;background:rgba(255,255,255,0.15);} /* halo */
+    h1{font-size:1.65rem;margin-bottom:.25rem;}
+    h2{
+      font-size:1.05rem;
+      font-weight:300;
+      margin-bottom:1.1rem;
+      opacity:0.92;
+      line-height:1.45;
+    }
+
+    /* Social */
+    .social-icons{
+      display:flex;
+      justify-content:center;
+      gap:1rem;
+      margin: 0.6rem 0 1.25rem;
+    }
+    .social-icons a{
+      display:flex;align-items:center;justify-content:center;
+      width:42px;height:42px;border:2px solid #fff;border-radius:999px;
+      color:#fff;
+      transition:transform .15s,opacity .15s,background .15s;
+    }
+    .social-icons a:hover{
+      transform:scale(1.08);
+      opacity:0.95;
+      background:rgba(255,255,255,0.14);
+    }
     .social-icons svg{width:22px;height:22px;fill:currentColor;}
 
-    /* ==== SECTION TITLES ==== */
-    .section-title{font-size:1.15rem;font-weight:700;margin:2rem 0 0.6rem;opacity:0.95;}
+    /* Segmented control (tabs) */
+    .tabs-wrap{
+      position:sticky;
+      top:0;
+      z-index:10;
+      padding: .25rem 0 .85rem;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .segmented{
+      margin:0 auto;
+      width:100%;
+      max-width:560px;
+      display:flex;
+      background: rgba(255,255,255,0.14);
+      border: 1px solid rgba(255,255,255,0.28);
+      border-radius: 999px;
+      padding: 6px;
+      box-shadow: 0 10px 26px rgba(0,0,0,0.14);
+    }
+    .segmented button{
+      flex:1;
+      border:0;
+      background:transparent;
+      color: rgba(255,255,255,0.88);
+      padding: .75rem .9rem;
+      border-radius: 999px;
+      font-weight:600;
+      font-size: .98rem;
+      cursor:pointer;
+      transition: background .15s, color .15s, transform .15s;
+    }
+    .segmented button:hover{ transform: scale(1.01); }
+    .segmented button.active{
+      background: rgba(255,255,255,0.22);
+      color:#fff;
+      box-shadow: 0 8px 18px rgba(0,0,0,0.14);
+    }
 
-    /* ==== BUTTONS ==== */
-    .links{width:100%;max-width:500px;display:flex;flex-direction:column;gap:1rem;}
-    .links a{display:flex;align-items:center;gap:.75rem;justify-content:flex-start;direction:rtl;width:100%;padding:1rem 1.5rem;border-radius:50px;text-decoration:none;font-size:1rem;font-weight:500;background:#fff;color:var(--button-text);box-shadow:0 4px 12px rgba(0,0,0,0.18);transition:transform 0.15s,box-shadow 0.15s,background 0.15s,color 0.15s;}
-    .links a:hover{transform:scale(1.04);background:var(--button-text);color:#fff;box-shadow:0 6px 18px rgba(0,0,0,0.25);}    
-    .links a .icon svg{width:20px;height:20px;fill:var(--button-text);transition:fill 0.15s;}
-    .links a:hover .icon svg{fill:#fff;}
+    /* Panels */
+    .panel{display:none;}
+    .panel.active{display:block;}
 
-    footer{margin-top:auto;font-size:0.75rem;opacity:0.7;}
+    /* Section titles */
+    .section-title{
+      font-size:1.15rem;
+      font-weight:700;
+      margin: 1.35rem 0 .7rem;
+      opacity:0.96;
+      text-align:right;
+    }
+
+    /* Glass cards list */
+    .cards{
+      width:100%;
+      display:flex;
+      flex-direction:column;
+      gap:.85rem;
+      margin-bottom: .35rem;
+    }
+
+    .card-link,
+    .glass-card{
+      width:100%;
+      text-align:right;
+      padding: 1rem 1.05rem;
+      border-radius: 18px;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: transform .15s, box-shadow .15s, background .15s;
+    }
+
+    a.card-link{
+      display:flex;
+      align-items:flex-start;
+      gap:.75rem;
+      text-decoration:none;
+      color:#fff;
+    }
+
+    a.card-link:hover{
+      transform: translateY(-1px);
+      background: var(--glass-bg-hover);
+      box-shadow: var(--shadow-hover);
+    }
+
+    .icon{
+      flex:0 0 auto;
+      width:26px;
+      display:flex;
+      justify-content:center;
+      margin-top:2px;
+      color:#fff; /* הופך גם אימוג׳י ללבן */
+      font-size:18px;
+      line-height:1;
+    }
+
+    .icon svg{width:20px;height:20px;fill:#fff;display:block;}
+
+    .card-text .title{
+      font-weight:600;
+      font-size:1rem;
+      margin-bottom:.1rem;
+    }
+    .card-text .subtitle{
+      font-weight:300;
+      font-size:.95rem;
+      opacity:0.9;
+      line-height:1.35;
+    }
+
+    /* Accordion (Courses tab) */
+    .accordion{
+      display:flex;
+      flex-direction:column;
+      gap:.85rem;
+      margin-top: .75rem;
+    }
+
+    .acc-item{
+      border-radius: 18px;
+      overflow:hidden;
+      background: var(--glass-bg);
+      border: 1px solid var(--glass-border);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      transition: background .15s, box-shadow .15s, transform .15s;
+      text-align:right;
+    }
+    .acc-item:hover{
+      background: var(--glass-bg-hover);
+      box-shadow: var(--shadow-hover);
+      transform: translateY(-1px);
+    }
+
+    .acc-btn{
+      width:100%;
+      border:0;
+      background:transparent;
+      color:#fff;
+      cursor:pointer;
+      padding: 1rem 1.05rem;
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap: 1rem;
+      text-align:right;
+    }
+
+    .acc-head{
+      display:flex;
+      flex-direction:column;
+      gap:.25rem;
+      width:100%;
+    }
+    .acc-title{
+      font-weight:800;
+      font-size:1.02rem;
+      letter-spacing:.2px;
+    }
+    .acc-subtitle{
+      font-weight:300;
+      font-size:.95rem;
+      opacity:0.9;
+      line-height:1.35;
+    }
+
+    .chev{
+      flex:0 0 auto;
+      width:28px;height:28px;
+      border-radius:999px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border: 1px solid rgba(255,255,255,0.35);
+      background: rgba(255,255,255,0.10);
+      transition: transform .15s, background .15s;
+      margin-top: 2px;
+    }
+    .chev svg{width:16px;height:16px;fill:#fff;display:block;}
+
+    .acc-body{
+      max-height:0;
+      overflow:hidden;
+      transition: max-height .22s ease;
+    }
+    .acc-body-inner{
+      padding: 0 1.05rem 1rem;
+      color: var(--muted);
+      line-height:1.55;
+      font-weight:300;
+      text-align:right;
+    }
+
+    .acc-item.open .acc-body{ max-height: 220px; }
+    .acc-item.open .chev{ transform: rotate(180deg); background: rgba(255,255,255,0.16); }
+
+    /* CTA */
+    .cta{
+      margin-top: 1.1rem;
+    }
+    .cta a{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap:.65rem;
+      width:100%;
+      text-decoration:none;
+      text-align:center;
+      padding: 1rem 1.05rem;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.24);
+      border: 1px solid rgba(255,255,255,0.40);
+      box-shadow: var(--shadow);
+      color:#fff;
+      font-weight:800;
+      transition: transform .15s, background .15s, box-shadow .15s;
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .cta a:hover{
+      transform: translateY(-1px);
+      background: rgba(255,255,255,0.30);
+      box-shadow: var(--shadow-hover);
+    }
+    .cta .cta-ic{
+      width:22px;height:22px;
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      border-radius:999px;
+      background: rgba(255,255,255,0.16);
+      border: 1px solid rgba(255,255,255,0.28);
+    }
+    .cta .cta-ic svg{width:14px;height:14px;fill:#fff;display:block;}
+
+    /* Contact line (with icons) */
+    .contact-line{
+      margin-top: 1.2rem;
+      display:flex;
+      justify-content:center;
+      gap:.9rem;
+      flex-wrap:wrap;
+      align-items:center;
+      text-align:center;
+      color: rgba(255,255,255,0.9);
+      font-weight:300;
+      line-height:1.6;
+      padding: .85rem 1rem;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.10);
+      border: 1px solid rgba(255,255,255,0.22);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .contact-line .c-item{
+      display:flex;
+      align-items:center;
+      gap:.45rem;
+      color:#fff;
+    }
+    .contact-line svg{width:16px;height:16px;fill:#fff;display:block;opacity:.95;}
+    .contact-line a{ color:#fff; text-decoration:underline; }
+
+    footer{
+      margin-top: 1.6rem;
+      font-size:.78rem;
+      opacity:0.7;
+    }
+
+    /* Small screens */
+    @media (max-width:420px){
+      h1{font-size:1.5rem;}
+      h2{font-size:1rem;}
+      .segmented button{font-size:.95rem;}
+    }
   </style>
 </head>
+
 <body>
- <img src="profile_512.webp" alt="Maayan Shalom" class="profile-img" loading="lazy" width="128" height="128">
+  <div class="container">
+    <img src="profile_512.webp" alt="Maayan Shalom" class="profile-img" loading="lazy" width="128" height="128" />
 
-  <h1>מעיין שלום | Maayan Shalom</h1>
-<h2>מהנדסת, מתמחה בשיפור תהליכים, דאטה וAI <br>
- הרצאות והדרכות על AI
-</h2>
+    <h1>מעיין שלום | Maayan Shalom</h1>
+    <h2>
+      מהנדסת, מתמחה בשיפור תהליכים, דאטה וAI <br />
+      הרצאות והדרכות על AI
+    </h2>
 
-  <!-- ====== TOP SOCIAL ICONS ====== -->
-  <div class="social-icons"> 
-    <a href="https://www.linkedin.com/in/maayan-shalom012" target="_blank" aria-label="LinkedIn"><svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 5.09 3.83 6.25 2.24 6.25C0.65 6.25 -0.5 5.09 -0.5 3.5C-0.5 1.91 0.65 0.75 2.24 0.75C3.83 0.75 4.98 1.91 4.98 3.5ZM0 8.5H4.5V24H0V8.5ZM8.5 8.5H12.7V10.6H12.76C13.34 9.5 14.8 8.34 16.96 8.34C21.26 8.34 22 11.09 22 15.08V24H17.5V15.83C17.5 13.92 17.46 11.44 15.04 11.44C12.58 11.44 12.25 13.54 12.25 15.7V24H7.75V8.5H8.5Z"/></svg></a>
-    <a href="https://www.instagram.com/maayan.shalom.ai?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" aria-label="Instagram"><svg viewBox="0 0 24 24"><path d="M7.5 2C4.46 2 2 4.46 2 7.5V16.5C2 19.54 4.46 22 7.5 22H16.5C19.54 22 22 19.54 22 16.5V7.5C22 4.46 19.54 2 16.5 2H7.5ZM12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7ZM18 5.5C18.83 5.5 19.5 6.17 19.5 7C19.5 7.83 18.83 8.5 18 8.5C17.17 8.5 16.5 7.83 16.5 7C16.5 6.17 17.17 5.5 18 5.5Z"/></svg></a>
-    <a href="https://www.facebook.com/maayan.shalom.2025" target="_blank" aria-label="Facebook"><svg viewBox="0 0 24 24"><path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12C2 17 5.66 21.1 10.44 21.88V14.89H7.9V12H10.44V9.79C10.44 7.29 11.93 5.93 14.12 5.93C15.18 5.93 16.29 6.12 16.29 6.12V8.59H15.09C13.9 8.59 13.55 9.28 13.55 10V12H16.18L15.77 14.89H13.55V21.88C18.34 21.1 22 17 22 12Z"/></svg></a>
-  
-    
+    <div class="social-icons">
+      <a href="https://www.linkedin.com/in/maayan-shalom012" target="_blank" rel="noopener" aria-label="LinkedIn">
+        <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 5.09 3.83 6.25 2.24 6.25C0.65 6.25 -0.5 5.09 -0.5 3.5C-0.5 1.91 0.65 0.75 2.24 0.75C3.83 0.75 4.98 1.91 4.98 3.5ZM0 8.5H4.5V24H0V8.5ZM8.5 8.5H12.7V10.6H12.76C13.34 9.5 14.8 8.34 16.96 8.34C21.26 8.34 22 11.09 22 15.08V24H17.5V15.83C17.5 13.92 17.46 11.44 15.04 11.44C12.58 11.44 12.25 13.54 12.25 15.7V24H7.75V8.5H8.5Z"/></svg>
+      </a>
+
+      <a href="https://www.instagram.com/maayan.shalom.ai?utm_source=ig_web_button_share_sheet&amp;igsh=ZDNlZDc0MzIxNw==" target="_blank" rel="noopener" aria-label="Instagram">
+        <svg viewBox="0 0 24 24"><path d="M7.5 2C4.46 2 2 4.46 2 7.5V16.5C2 19.54 4.46 22 7.5 22H16.5C19.54 22 22 19.54 22 16.5V7.5C22 4.46 19.54 2 16.5 2H7.5ZM12 7C14.76 7 17 9.24 17 12C17 14.76 14.76 17 12 17C9.24 17 7 14.76 7 12C7 9.24 9.24 7 12 7ZM18 5.5C18.83 5.5 19.5 6.17 19.5 7C19.5 7.83 18.83 8.5 18 8.5C17.17 8.5 16.5 7.83 16.5 7C16.5 6.17 17.17 5.5 18 5.5Z"/></svg>
+      </a>
+
+      <a href="https://www.facebook.com/profile.php?id=61576235122754&notif_id=1765562414726162&notif_t=page_user_activity&ref=notif#" target="_blank" rel="noopener" aria-label="Facebook">
+        <svg viewBox="0 0 24 24"><path d="M22 12C22 6.48 17.52 2 12 2S2 6.48 2 12C2 17 5.66 21.1 10.44 21.88V14.89H7.9V12H10.44V9.79C10.44 7.29 11.93 5.93 14.12 5.93C15.18 5.93 16.29 6.12 16.29 6.12V8.59H15.09C13.9 8.59 13.55 9.28 13.55 10V12H16.18L15.77 14.89H13.55V21.88C18.34 21.1 22 17 22 12Z"/></svg>
+      </a>
+    </div>
+
+    <!-- Tabs -->
+    <div class="tabs-wrap">
+      <div class="segmented" role="tablist" aria-label="ניווט">
+        <button class="tab-btn active" type="button" role="tab" aria-selected="true" aria-controls="panel-tools" id="tab-tools" data-target="panel-tools">
+          כלים ומדריכים
+        </button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-courses" id="tab-courses" data-target="panel-courses">
+          קורסים והרצאות
+        </button>
+      </div>
+    </div>
+
+    <!-- Panel: Tools -->
+    <section id="panel-tools" class="panel active" role="tabpanel" aria-labelledby="tab-tools">
+      <h3 class="section-title">🧾 פרומפטים מוכנים</h3>
+      <div class="cards">
+        <a class="card-link" href="pro-prompts-for-gpt.pdf" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+          </span>
+          <span class="card-text">
+            <div class="title">מדריך פרומפטים מקצועיים ל-ChatGPT</div>
+          </span>
+        </a>
+
+        <a class="card-link" href="chatgpt-life-improving-prompts.pdf" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+          </span>
+          <span class="card-text">
+            <div class="title">פרומפטים ל-ChatGPT שיהפכו לכם את החיים לקלים יותר</div>
+          </span>
+        </a>
+      </div>
+
+      <h3 class="section-title">🧠 מודלי שפה (צ'אטבוטים)</h3>
+      <div class="cards">
+        <a class="card-link" href="https://chat.openai.com/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">ChatGPT</div>
+            <div class="subtitle">המודל המוכר ביותר</div>
+          </span>
+        </a>
+
+        <a class="card-link" href="https://claude.ai/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">Claude</div>
+            <div class="subtitle">מעולה בניתוח נתונים וכתיבת ניסוחים</div>
+          </span>
+        </a>
+
+        <a class="card-link" href="https://gemini.google.com/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">Gemini</div>
+            <div class="subtitle">הצ'אט של Google</div>
+          </span>
+        </a>
+
+        <a class="card-link" href="https://deepseek.ai/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">DeepSeek</div>
+            <div class="subtitle">בינה סינית בחינם</div>
+          </span>
+        </a>
+
+        <a class="card-link" href="https://x.ai/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">Grok</div>
+            <div class="subtitle">בינה של אילון מאסק</div>
+          </span>
+        </a>
+      </div>
+
+      <h3 class="section-title">🤖 SUPER AGENT</h3>
+      <div class="cards">
+        <a class="card-link" href="https://www.genspark.ai/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">Genspark</div>
+            <div class="subtitle">סוכן-על לחיפוש, ניתוח ותחקיר</div>
+          </span>
+        </a>
+
+        <a class="card-link" href="https://manus.im/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">Manus</div>
+            <div class="subtitle">סוכן AI אוטונומי לביצוע משימות</div>
+          </span>
+        </a>
+      </div>
+
+      <h3 class="section-title">⚙️ פרודוקטיביות</h3>
+      <div class="cards">
+        <a class="card-link" href="https://gamma.app/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Gamma</div><div class="subtitle">יוצר מצגות אוטומטית</div></span></a>
+        <a class="card-link" href="https://www.timeos.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">TimeOS</div><div class="subtitle">תמלול ו TL;DR לפגישות</div></span></a>
+        <a class="card-link" href="https://www.chatpdf.com/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">ChatPDF</div><div class="subtitle">שאלות על PDF</div></span></a>
+        <a class="card-link" href="https://gptexcel.uk/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">GPT Excel</div><div class="subtitle">נוסחאות אקסל</div></span></a>
+        <a class="card-link" href="https://notebooklm.google/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Notebook LM</div><div class="subtitle">סביבת ידע למסמכים</div></span></a>
+      </div>
+
+      <h3 class="section-title">🎨 יצירת תמונות</h3>
+      <div class="cards">
+        <a class="card-link" href="https://openai.com/dall-e" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">DALL·E</div><div class="subtitle">יצירת תמונות</div></span></a>
+        <a class="card-link" href="https://www.midjourney.com/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Midjourney</div><div class="subtitle">דימויים חזקים</div></span></a>
+        <a class="card-link" href="https://ideogram.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Ideogram</div><div class="subtitle">תמונה + טקסט</div></span></a>
+        <a class="card-link" href="https://leonardo.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Leonardo</div><div class="subtitle">עריכת וייצור תמונות</div></span></a>
+        <a class="card-link" href="https://magnific.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Magnific AI</div><div class="subtitle">שיפור איכות</div></span></a>
+        <a class="card-link" href="https://www.astria.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Astria</div><div class="subtitle">צילומים אישיים</div></span></a>
+      </div>
+
+      <h3 class="section-title">🖌️ גרפיקה ועיצוב</h3>
+      <div class="cards">
+        <a class="card-link" href="https://brandmark.io/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Brandmark</div><div class="subtitle">לוגואים ב-AI</div></span></a>
+        <a class="card-link" href="https://logodiffusion.com/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Logo Diffusion</div><div class="subtitle">לוגו וקטורי</div></span></a>
+        <a class="card-link" href="https://www.canva.com/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Canva</div><div class="subtitle">עיצוב גרפי קל</div></span></a>
+        <a class="card-link" href="https://infography.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Infography</div><div class="subtitle">אינפוגרפיקות</div></span></a>
+        <a class="card-link" href="https://www.napkin.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Napkin.ai</div><div class="subtitle">גרפים ושרטוטים חכמים</div></span></a>
+      </div>
+
+      <h3 class="section-title">🎥 ווידאו</h3>
+      <div class="cards">
+        <a class="card-link" href="https://runwayml.com/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Runway</div><div class="subtitle">עריכת וידאו</div></span></a>
+        <a class="card-link" href="https://lumalabs.ai/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Luma</div><div class="subtitle">וידאו מטקסט או תמונה</div></span></a>
+        <a class="card-link" href="https://klingai.com/global/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Kling</div><div class="subtitle">סינתזת סרטונים</div></span></a>
+        <a class="card-link" href="https://pika.art/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Pika</div><div class="subtitle">וידאו + אפקטים</div></span></a>
+        <a class="card-link" href="https://openai.com/sora" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Sora</div><div class="subtitle">מחולל וידאו OpenAI</div></span></a>
+      </div>
+
+      <h3 class="section-title">🎙️ אודיו</h3>
+      <div class="cards">
+        <a class="card-link" href="https://suno.ai/" target="_blank" rel="noopener">
+          <span class="icon">🔗</span>
+          <span class="card-text">
+            <div class="title">Suno</div>
+            <div class="subtitle">יצירת שירים</div>
+          </span>
+        </a>
+      </div>
+
+      <h3 class="section-title">🔁 אוטומציה</h3>
+      <div class="cards">
+        <a class="card-link" href="https://manychat.com/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">ManyChat</div><div class="subtitle">אוטומציית הודעות</div></span></a>
+        <a class="card-link" href="https://www.make.com/en" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">Make</div><div class="subtitle">אוטומציות No-Code</div></span></a>
+        <a class="card-link" href="https://n8n.io/" target="_blank" rel="noopener"><span class="icon">🔗</span><span class="card-text"><div class="title">n8n</div><div class="subtitle">אוטומציות ותהליכים (Self-Hosted)</div></span></a>
+      </div>
+
+      <h3 class="section-title">🌟 מובילי דעה וטכנולוגיה</h3>
+      <div class="cards">
+        <a class="card-link" href="https://maayan012.github.io/blog-sam-altman-post/" target="_blank" rel="noopener">
+          <span class="icon">📰</span>
+          <span class="card-text">
+            <div class="title">העתיד לפי OpenAI</div>
+          </span>
+        </a>
+      </div>
+
+      <h3 class="section-title">✨ מדריכי יצירה ב-AI</h3>
+      <div class="cards">
+        <a class="card-link" href="trendy-styles.pdf" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6C4.9 2 4.01 2.9 4.01 4L4 20c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+          </span>
+          <span class="card-text"><div class="title">מדריך סגנונות טרנדיים ליצירת תמונות עם GPT</div></span>
+        </a>
+
+        <a class="card-link" href="animated-transition.pdf" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0-2 .9-2 2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+          </span>
+          <span class="card-text"><div class="title">מדריך מעבר מונפש בין תמונות</div></span>
+        </a>
+
+        <a class="card-link" href="https://claude.ai/public/artifacts/91bd34f5-d55e-437b-bdb1-ac36e8f0bdf2" target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0-2 .9-2 2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+          </span>
+          <span class="card-text"><div class="title">יצירת סטיקרים ל-WhatsApp</div></span>
+        </a>
+
+        <a class="card-link" href="https://claude.ai/public/artifacts/9c502f42-cfc7-4ad9-8d4a-aef9b8253955?mcp_token=eyJwaWQiOjI4NzM1MzAsInNpZCI6MTIzMzM5ODM4OCwiYXgiOiI4M2FkYjMyMmJmODUwOWM3YjNlZWU1MTY0NDQzMWZjYiIsInRzIjoxNzUxMTE3NTE5LCJleHAiOjE3NTM1MzY3MTl9.4xIRr2uDS0J25c0ydXL9gcNUxRa9sDSHWZYNtE6sOo8&fbclid=PAQ0xDSwLMzi9leHRuA2FlbQIxMAABp-Yxk0FhYLeHqWjv2NfTNttXnFDurfebmLogXlIu7_ncZdaimqLeVmDeyY0r_aem_74hnrLSCppZt69CdyqRtCQ"
+           target="_blank" rel="noopener">
+          <span class="icon">
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0-2 .9-2 2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+          </span>
+          <span class="card-text"><div class="title">מדריך HeyGen, יצירת פרזנטור וידאו ב-AI</div></span>
+        </a>
+      </div>
+
+      <div class="cta">
+        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">
+          <span class="cta-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/></svg>
+          </span>
+          לתיאום
+        </a>
+      </div>
+
+      <div class="contact-line">
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
+          <a href="tel:+972543675502">0543675502</a>
+        </div>
+        <span>|</span>
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Panel: Courses -->
+    <section id="panel-courses" class="panel" role="tabpanel" aria-labelledby="tab-courses">
+      <h3 class="section-title">קורסים והרצאות</h3>
+
+      <div class="accordion" id="accordion">
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">
+            <div class="acc-head">
+              <div class="acc-title">AI MASTERY</div>
+              <div class="acc-subtitle">שליטה מעשית בכלי AI לעבודה היומיומית</div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-inner">
+              קורס יישומי להתמודדות יומיומית עם כלי בינה מלאכותית, יצירת תוצרים איכותיים ובניית תהליכי עבודה חכמים.
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">
+            <div class="acc-head">
+              <div class="acc-title">סדנאות והרצאות לארגונים</div>
+              <div class="acc-subtitle">AI פרקטי שמייעל עבודה וחוסך זמן</div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-inner">
+              סדנאות יישומיות להטמעת AI בארגון, עם כלים פשוטים ללא צורך בידע טכני.
+            </div>
+          </div>
+        </div>
+
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">
+            <div class="acc-head">
+              <div class="acc-title">סדנאות והרצאות לצוותי חינוך</div>
+              <div class="acc-subtitle">שילוב AI בהוראה ובניהול למידה</div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-inner">
+              הכשרות לצוותי חינוך לשילוב אחראי ויישומי של AI בתהליכי הוראה ולמידה.
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="cta">
+        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">
+          <span class="cta-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/></svg>
+          </span>
+          לתיאום
+        </a>
+      </div>
+
+      <div class="contact-line">
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
+          <a href="tel:+972543675502">0543675502</a>
+        </div>
+        <span>|</span>
+        <div class="c-item">
+          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
+          <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
+        </div>
+      </div>
+    </section>
+
+    <footer>© <span id="year"></span> Maayan Shalom</footer>
   </div>
-  <!-- 🧾 פרומפטים מוכנים ל-AI -->
-<h3 class="section-title">🧾פרומפטים מוכנים</h3>
-<section class="links">
- 
-  <a href="pro-prompts-for-gpt.pdf" target="_blank" rel="noopener">
-    <span class="icon">
-      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-    </span>
-    מדריך פרומפטים מקצועיים ל-ChatGPT
-  </a>
 
-  <a href="chatgpt-life-improving-prompts.pdf" target="_blank" rel="noopener">
-    <span class="icon">
-      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-    </span>
-    פרומפטים ל-ChatGPT שיהפכו לכם את החיים לקלים יותר
-  </a>
-</section>
+  <script>
+    // Year
+    document.getElementById('year').textContent = new Date().getFullYear();
 
-<!-- === AI TOOLS CATALOG === -->
+    // Tabs
+    const tabButtons = document.querySelectorAll('.tab-btn');
+    const panels = document.querySelectorAll('.panel');
 
-<!-- 🧠 מודלי שפה (צ'אטבוטים) -->
-<h3 class="section-title">🧠 מודלי שפה (צ'אטבוטים)</h3>
-<section class="links">
- <a href="https://chat.openai.com/" target="_blank"><span class="icon">🔗</span>ChatGPT – המודל המוכר ביותר</a>
-  <a href="https://claude.ai/" target="_blank"><span class="icon">🔗</span>Claude –מעולה בניתוח נתונים וכתיבת ניסוחים</a>
-  <a href="https://gemini.google.com/" target="_blank"><span class="icon">🔗</span>Gemini – הצ'אט של Google</a>
-  <a href="https://deepseek.ai/" target="_blank"><span class="icon">🔗</span>DeepSeek – בינה סינית בחינם</a>
-  <a href="https://x.ai/" target="_blank"><span class="icon">🔗</span>Grok – בינה של אילון מאסק</a>
-</section>
+    function activateTab(targetId){
+      tabButtons.forEach(btn => {
+        const isActive = btn.dataset.target === targetId;
+        btn.classList.toggle('active', isActive);
+        btn.setAttribute('aria-selected', isActive ? 'true' : 'false');
+      });
 
-<!-- 🤖 SUPER AGENT -->
-<h3 class="section-title">🤖 SUPER AGENT</h3>
-<section class="links">
-  <a href="https://www.genspark.ai/" target="_blank">
-    <span class="icon">🔗</span>Genspark – סוכן-על לחיפוש, ניתוח ותחקיר
-  </a>
-  <a href="https://manus.im/" target="_blank"><span class="icon">🔗</span>Manus – סוכן AI אוטונומי לביצוע משימות</a>
-  </a>
-</section>
+      panels.forEach(panel => {
+        panel.classList.toggle('active', panel.id === targetId);
+      });
 
-<!-- ⚙️ פרודוקטיביות -->
-<h3 class="section-title">⚙️ פרודוקטיביות</h3>
-<section class="links">
-  <a href="https://gamma.app/" target="_blank"><span class="icon">🔗</span>Gamma – יוצר מצגות אוטומטית</a>
-  <a href="https://www.timeos.ai/" target="_blank"><span class="icon">🔗</span>TimeOS – תמלול ו־TL;DR לפגישות</a>
-  <a href="https://www.chatpdf.com/" target="_blank"><span class="icon">🔗</span>ChatPDF – שאלות על PDF</a>
-  <a href="https://gptexcel.uk/" target="_blank"><span class="icon">🔗</span>GPT Excel – נוסחאות אקסל</a>
-  <a href="https://notebooklm.google/" target="_blank"><span class="icon">🔗</span>Notebook LM – סביבת ידע למסמכים</a>
-</section>
+      // Scroll a bit up for nicer UX on mobile
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 
-<!-- 🎨 יצירת תמונות -->
-<h3 class="section-title">🎨 יצירת תמונות</h3>
-<section class="links">
-  <a href="https://openai.com/dall-e" target="_blank"><span class="icon">🔗</span>DALL·E – יצירת תמונות</a>
-  <a href="https://www.midjourney.com/" target="_blank"><span class="icon">🔗</span>Midjourney – דימויים חזקים</a>
-  <a href="https://ideogram.ai/" target="_blank"><span class="icon">🔗</span>Ideogram – תמונה + טקסט</a>
-  <a href="https://leonardo.ai/" target="_blank"><span class="icon">🔗</span>Leonardo – עריכת וייצור תמונות</a>
-  <a href="https://magnific.ai/" target="_blank"><span class="icon">🔗</span>Magnific AI – שיפור איכות</a>
-  <a href="https://www.astria.ai/" target="_blank"><span class="icon">🔗</span>Astria – צילומים אישיים</a>
-</section>
+    tabButtons.forEach(btn => {
+      btn.addEventListener('click', () => activateTab(btn.dataset.target));
+    });
 
-<!-- 🖌️ גרפיקה ועיצוב -->
-<h3 class="section-title">🖌️ גרפיקה ועיצוב</h3>
-<section class="links">
-  <a href="https://brandmark.io/" target="_blank"><span class="icon">🔗</span>Brandmark – לוגואים ב-AI</a>
-  <a href="https://logodiffusion.com/" target="_blank"><span class="icon">🔗</span>Logo Diffusion – לוגו וקטורי</a>
-  <a href="https://www.canva.com/" target="_blank"><span class="icon">🔗</span>Canva – עיצוב גרפי קל</a>
-  <a href="https://infography.ai/" target="_blank"><span class="icon">🔗</span>Infography – אינפוגרפיקות</a>
-  <a href="https://www.napkin.ai/" target="_blank"><span class="icon">🔗</span>Napkin.ai – גרפים ושרטוטים חכמים </a>
-</section>
+    // Accordion (toggle each independently, default all closed)
+    const accItems = document.querySelectorAll('.acc-item');
 
-<!-- 🎥 ווידאו -->
-<h3 class="section-title">🎥 ווידאו</h3>
-<section class="links">
-  <a href="https://runwayml.com/" target="_blank"><span class="icon">🔗</span>Runway – עריכת וידאו</a>
-  <a href="https://lumalabs.ai/" target="_blank"><span class="icon">🔗</span>Luma – וידאו מטקסט/תמונה</a>
-  <a href="https://klingai.com/global/" target="_blank"><span class="icon">🔗</span>Kling – סינתזת סרטונים</a>
-  <a href="https://pika.art/" target="_blank"><span class="icon">🔗</span>Pika – וידאו + אפקטים</a>
-  <a href="https://openai.com/sora" target="_blank"><span class="icon">🔗</span>Sora – מחולל וידאו OpenAI</a>
-</section>
+    accItems.forEach(item => {
+      const btn = item.querySelector('.acc-btn');
+      btn.addEventListener('click', () => {
+        const willOpen = !item.classList.contains('open');
+        item.classList.toggle('open', willOpen);
+        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
+      });
+    });
 
-<!-- 🎙️ אודיו -->
-<h3 class="section-title">🎙️ אודיו</h3>
-<section class="links">
-  <a href="https://suno.ai/" target="_blank"><span class="icon">🔗</span>Suno – יצירת שירים</a>
-</section>
-
-<!-- 🔁 אוטומציה -->
-<h3 class="section-title">🔁 אוטומציה</h3>
-<section class="links">
-  <a href="https://manychat.com/" target="_blank"><span class="icon">🔗</span>ManyChat – אוטומציית הודעות</a>
-    <a href="https://www.make.com/en" target="_blank">
-    <span class="icon">🔗</span>Make – אוטומציות No-Code
-  </a>
-  <a href="https://n8n.io/" target="_blank">
-    <span class="icon">🔗</span>n8n – אוטומציות ותהליכים (Self-Hosted)
-  </a>
-</section>
-
-  
-
-
-  <!-- 🌟 מובילי דעה וטכנולוגיה -->
-<h3 class="section-title">🌟 מובילי דעה וטכנולוגיה</h3>
-<section class="links">
-  <a href="https://maayan012.github.io/blog-sam-altman-post/"
-     target="_blank">
-   <span class="icon">📰</span>העתיד לפי OpenAI
-  </a>
-</section>
-
-<!-- === END TOOLS === -->
-
-<!-- ===== מדריכים ===== -->
-<h3 class="section-title"> ✨מדריכי יצירה ב-AI</h3>
-<section class="links">
-  <a href="trendy-styles.pdf" target="_blank" rel="noopener">
-    <span class="icon">
-      <!-- אייקון קובץ/PDF -->
-      <svg viewBox="0 0 24 24"><path d="M14 2H6C4.9 2 4.01 2.9 4.01 4L4 20c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-    </span>
-    מדריך סגנונות טרנדיים ליצירת תמונות עם GPT
-  </a>
-
-  <a href="animated-transition.pdf" target="_blank" rel="noopener">
-    <span class="icon">
-      <!-- אותו אייקון לקובץ נוסף -->
-      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-    </span>
-    מדריך מעבר מונפש בין תמונות
-  </a>
-    <a href="https://claude.ai/public/artifacts/91bd34f5-d55e-437b-bdb1-ac36e8f0bdf2" target="_blank" rel="noopener">
-    <span class="icon">
-      <!-- אייקון PDF/קובץ -->
-      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-    </span>
-    יצירת סטיקרים ל-WhatsApp
-  </a>
-  <!-- מדריך HeyGen -->
-  <a href="https://claude.ai/public/artifacts/9c502f42-cfc7-4ad9-8d4a-aef9b8253955?mcp_token=eyJwaWQiOjI4NzM1MzAsInNpZCI6MTIzMzM5ODM4OCwiYXgiOiI4M2FkYjMyMmJmODUwOWM3YjNlZWU1MTY0NDQzMWZjYiIsInRzIjoxNzUxMTE3NTE5LCJleHAiOjE3NTM1MzY3MTl9.4xIRr2uDS0J25c0ydXL9gcNUxRa9sDSHWZYNtE6sOo8&fbclid=PAQ0xDSwLMzi9leHRuA2FlbQIxMAABp-Yxk0FhYLeHqWjv2NfTNttXnFDurfebmLogXlIu7_ncZdaimqLeVmDeyY0r_aem_74hnrLSCppZt69CdyqRtCQ"
-     target="_blank" rel="noopener">
-    <span class="icon">
-      <!-- אייקון קובץ/מדריך -->
-      <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
-    </span>
-    מדריך HeyGen – יצירת פרזנטור וידאו ב-AI
-  </a>
-
-</section>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    // Default state
+    activateTab('panel-tools'); // ברירת מחדל: כלים ומדריכים
+  </script>
+</body>
+</html>
