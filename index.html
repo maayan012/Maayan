@@ -1,3 +1,4 @@
+
 <!DOCTYPE html> 
 <html lang="he" dir="rtl">
 <head>
@@ -315,34 +316,6 @@
     }
     .cta .cta-ic svg{width:14px;height:14px;fill:#fff;display:block;}
 
-    /* Contact line (with icons) */
-    .contact-line{
-      margin-top: 1.2rem;
-      display:flex;
-      justify-content:center;
-      gap:.9rem;
-      flex-wrap:wrap;
-      align-items:center;
-      text-align:center;
-      color: rgba(255,255,255,0.9);
-      font-weight:300;
-      line-height:1.6;
-      padding: .85rem 1rem;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.10);
-      border: 1px solid rgba(255,255,255,0.22);
-      backdrop-filter: blur(10px);
-      -webkit-backdrop-filter: blur(10px);
-    }
-    .contact-line .c-item{
-      display:flex;
-      align-items:center;
-      gap:.45rem;
-      color:#fff;
-    }
-    .contact-line svg{width:16px;height:16px;fill:#fff;display:block;opacity:.95;}
-    .contact-line a{ color:#fff; text-decoration:underline; }
-
     footer{
       margin-top: 1.6rem;
       font-size:.78rem;
@@ -369,6 +342,20 @@
     </h2>
 
     <div class="social-icons">
+      <!-- WhatsApp -->
+      <a href="https://wa.me/972543675502" target="_blank" rel="noopener" aria-label="WhatsApp">
+        <svg viewBox="0 0 24 24">
+          <path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/>
+        </svg>
+      </a>
+
+      <!-- Email -->
+      <a href="mailto:smartai.maayan@gmail.com" aria-label="Email">
+        <svg viewBox="0 0 24 24">
+          <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
+        </svg>
+      </a>
+
       <a href="https://www.linkedin.com/in/maayan-shalom012" target="_blank" rel="noopener" aria-label="LinkedIn">
         <svg viewBox="0 0 24 24"><path d="M4.98 3.5C4.98 5.09 3.83 6.25 2.24 6.25C0.65 6.25 -0.5 5.09 -0.5 3.5C-0.5 1.91 0.65 0.75 2.24 0.75C3.83 0.75 4.98 1.91 4.98 3.5ZM0 8.5H4.5V24H0V8.5ZM8.5 8.5H12.7V10.6H12.76C13.34 9.5 14.8 8.34 16.96 8.34C21.26 8.34 22 11.09 22 15.08V24H17.5V15.83C17.5 13.92 17.46 11.44 15.04 11.44C12.58 11.44 12.25 13.54 12.25 15.7V24H7.75V8.5H8.5Z"/></svg>
       </a>
@@ -389,7 +376,10 @@
           כלים ומדריכים
         </button>
         <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-courses" id="tab-courses" data-target="panel-courses">
-          קורסים והרצאות
+          קורסים והשראות
+        </button>
+        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about" data-target="panel-about">
+          קצת עלי
         </button>
       </div>
     </div>
@@ -555,7 +545,7 @@
 
         <a class="card-link" href="animated-transition.pdf" target="_blank" rel="noopener">
           <span class="icon">
-            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0-2 .9-2 2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
+            <svg viewBox="0 0 24 24"><path d="M14 2H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h10c1.1 0 2-.9 2-2V8l-6-6zm-1 7V3.5L18.5 9H13z"/></svg>
           </span>
           <span class="card-text"><div class="title">מדריך מעבר מונפש בין תמונות</div></span>
         </a>
@@ -584,23 +574,11 @@
           לפרטים והתאמה
         </a>
       </div>
-
-      <div class="contact-line">
-        <div class="c-item">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
-          <a href="tel:+972543675502">0543675502</a>
-        </div>
-        <span>|</span>
-        <div class="c-item">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
-        </div>
-      </div>
     </section>
 
     <!-- Panel: Courses -->
     <section id="panel-courses" class="panel" role="tabpanel" aria-labelledby="tab-courses">
-      <h3 class="section-title">קורסים והרצאות</h3>
+      <h3 class="section-title">קורסים והרצאות השראה</h3>
 
       <div class="accordion" id="accordion">
         <div class="acc-item">
@@ -653,6 +631,23 @@
             </div>
           </div>
         </div>
+
+        <div class="acc-item">
+          <button class="acc-btn" type="button" aria-expanded="false">
+            <div class="acc-head">
+              <div class="acc-title">הרצאות השראה</div>
+              <div class="acc-subtitle">מיינדסט, חשיבה, והשראה ליישום חכם של AI</div>
+            </div>
+            <div class="chev" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
+            </div>
+          </button>
+          <div class="acc-body">
+            <div class="acc-body-inner">
+              הרצאות השראה שמחברות בין סיפור, חשיבה ותובנות, ומייצרות בהירות וביטחון בשימוש ב-AI.
+            </div>
+          </div>
+        </div>
       </div>
 
       <div class="cta">
@@ -663,17 +658,26 @@
           לפרטים והתאמה
         </a>
       </div>
+    </section>
 
-      <div class="contact-line">
-        <div class="c-item">
-          <svg viewBox="0 0 24 24"><path d="M6.62 10.79a15.05 15.05 0 0 0 6.59 6.59l2.2-2.2a1 1 0 0 1 1.01-.24c1.12.37 2.33.57 3.58.57a1 1 0 0 1 1 1V20a1 1 0 0 1-1 1C10.07 21 3 13.93 3 5a1 1 0 0 1 1-1h3.5a1 1 0 0 1 1 1c0 1.25.2 2.46.57 3.58a1 1 0 0 1-.24 1.01l-2.21 2.2z"/></svg>
-          <a href="tel:+972543675502">0543675502</a>
-        </div>
-        <span>|</span>
-        <div class="c-item">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          <a href="mailto:maayan.shalom012@gmail.com">maayan.shalom012@gmail.com</a>
-        </div>
+    <!-- Panel: About -->
+    <section id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about">
+      <h3 class="section-title">קצת עלי</h3>
+
+      <div class="glass-card" style="text-align:right;">
+        מהנדסת תעשייה וניהול (B.Sc, טכניון) מומחית ליישום פתרונות בינה מלאכותית.<br />
+        בעלת ניסיון מעשי בפיתוח פתרונות AI ובהדרכת צוותים מקצועיים.<br />
+        מעל עשור של ניסיון בניתוח ושיפור תהליכים, דאטה ו־BI.<br />
+        בעלת גישה פרקטית שמנגישה את עולם ה-AI בצורה ברורה, אפקטיבית ושימושית.
+      </div>
+
+      <div class="cta">
+        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">
+          <span class="cta-ic" aria-hidden="true">
+            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/></svg>
+          </span>
+          לפרטים והתאמה
+        </a>
       </div>
     </section>
 
