@@ -1,4 +1,9 @@
+הבנתי בדיוק.
+משאירים את טאב “כלים ומדריכים” כמו שהוא, מסירים לגמרי את טאב “קצת עלי”, ובטאב “קורסים והרצאות” מחליפים לתוכן של קוד 2, תוך שמירה על הרקע המדורג של דף הנחיתה.
 
+הנה קובץ HTML מלא ומעודכן להדבקה (כולל כל השינויים):
+
+```html
 <!DOCTYPE html> 
 <html lang="he" dir="rtl">
 <head>
@@ -171,7 +176,7 @@
       display:flex;
       justify-content:center;
       margin-top:2px;
-      color:#fff; /* הופך גם אימוג׳י ללבן */
+      color:#fff;
       font-size:18px;
       line-height:1;
     }
@@ -190,92 +195,42 @@
       line-height:1.35;
     }
 
-    /* Accordion (Courses tab) */
-    .accordion{
+    /* Courses list (Code 2 style, adapted to current design) */
+    .service-item{
       display:flex;
-      flex-direction:column;
-      gap:.85rem;
-      margin-top: .75rem;
-    }
-
-    .acc-item{
+      align-items:center;
+      gap:.8rem;
+      padding: .95rem 1.05rem;
       border-radius: 18px;
-      overflow:hidden;
       background: var(--glass-bg);
       border: 1px solid var(--glass-border);
       box-shadow: var(--shadow);
       backdrop-filter: blur(10px);
       -webkit-backdrop-filter: blur(10px);
-      transition: background .15s, box-shadow .15s, transform .15s;
+      transition: transform .15s, box-shadow .15s, background .15s;
       text-align:right;
     }
-    .acc-item:hover{
+    .service-item:hover{
+      transform: translateY(-1px);
       background: var(--glass-bg-hover);
       box-shadow: var(--shadow-hover);
-      transform: translateY(-1px);
     }
-
-    .acc-btn{
-      width:100%;
-      border:0;
-      background:transparent;
-      color:#fff;
-      cursor:pointer;
-      padding: 1rem 1.05rem;
-      display:flex;
-      align-items:flex-start;
-      justify-content:space-between;
-      gap: 1rem;
-      text-align:right;
-    }
-
-    .acc-head{
-      display:flex;
-      flex-direction:column;
-      gap:.25rem;
-      width:100%;
-    }
-    .acc-title{
-      font-weight:800;
-      font-size:1.02rem;
-      letter-spacing:.2px;
-    }
-    .acc-subtitle{
-      font-weight:300;
-      font-size:.95rem;
-      opacity:0.9;
-      line-height:1.35;
-    }
-
-    .chev{
-      flex:0 0 auto;
-      width:28px;height:28px;
+    .service-emoji{
+      width:34px;
+      height:34px;
       border-radius:999px;
       display:flex;
       align-items:center;
       justify-content:center;
-      border: 1px solid rgba(255,255,255,0.35);
-      background: rgba(255,255,255,0.10);
-      transition: transform .15s, background .15s;
-      margin-top: 2px;
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-size:18px;
+      flex:0 0 auto;
     }
-    .chev svg{width:16px;height:16px;fill:#fff;display:block;}
-
-    .acc-body{
-      max-height:0;
-      overflow:hidden;
-      transition: max-height .22s ease;
+    .service-text{
+      font-weight:600;
+      font-size:1rem;
     }
-    .acc-body-inner{
-      padding: 0 1.05rem 1rem;
-      color: var(--muted);
-      line-height:1.55;
-      font-weight:300;
-      text-align:right;
-    }
-
-    .acc-item.open .acc-body{ max-height: 220px; }
-    .acc-item.open .chev{ transform: rotate(180deg); background: rgba(255,255,255,0.16); }
 
     /* CTA */
     .cta{
@@ -342,14 +297,12 @@
     </h2>
 
     <div class="social-icons">
-      <!-- WhatsApp -->
       <a href="https://wa.me/972543675502" target="_blank" rel="noopener" aria-label="WhatsApp">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/>
+        <svg viewBox="0 0 32 32" xmlns="http://www.w3.org/2000/svg">
+          <path d="M16 0C7.163 0 0 7.163 0 16c0 2.837.742 5.502 2.038 7.821L0 32l8.426-2.012A15.9 15.9 0 0 0 16 32c8.837 0 16-7.163 16-16S24.837 0 16 0zm0 29.09a13.02 13.02 0 0 1-6.64-1.82l-.474-.28-4.996 1.193 1.335-4.873-.309-.5A13.03 13.03 0 1 1 16 29.09zm7.538-9.644c-.412-.206-2.437-1.203-2.815-1.342-.378-.137-.653-.206-.928.206-.275.413-1.065 1.342-1.305 1.618-.24.275-.481.309-.893.103-.412-.206-1.739-.64-3.31-2.04-1.222-1.09-2.047-2.437-2.286-2.849-.24-.413-.025-.636.181-.842.185-.184.412-.481.618-.721.206-.24.275-.413.412-.688.137-.275.069-.515-.034-.721-.103-.206-.928-2.232-1.27-3.058-.333-.8-.672-.69-.928-.703-.24-.012-.515-.015-.79-.015s-.721.103-1.1.515c-.378.413-1.444 1.412-1.444 3.446 0 2.034 1.48 4.001 1.687 4.277.206.275 2.916 4.453 7.07 6.247.988.426 1.76.681 2.36.872.991.315 1.893.27 2.605.164.795-.118 2.437-.996 2.783-1.96.344-.964.344-1.79.24-1.96-.103-.172-.378-.275-.79-.481z"/>
         </svg>
       </a>
 
-      <!-- Email -->
       <a href="mailto:smartai.maayan@gmail.com" aria-label="Email">
         <svg viewBox="0 0 24 24">
           <path d="M20 4H4c-1.1 0-2 .9-2 2v12c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4-8 5-8-5V6l8 5 8-5v2z"/>
@@ -376,15 +329,12 @@
           כלים ומדריכים
         </button>
         <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-courses" id="tab-courses" data-target="panel-courses">
-          קורסים והשראות
-        </button>
-        <button class="tab-btn" type="button" role="tab" aria-selected="false" aria-controls="panel-about" id="tab-about" data-target="panel-about">
-          קצת עלי
+          קורסים והרצאות
         </button>
       </div>
     </div>
 
-    <!-- Panel: Tools -->
+    <!-- Panel: Tools (נשאר בדיוק כפי שהוא) -->
     <section id="panel-tools" class="panel active" role="tabpanel" aria-labelledby="tab-tools">
       <h3 class="section-title">🧾 פרומפטים מוכנים</h3>
       <div class="cards">
@@ -576,99 +526,35 @@
       </div>
     </section>
 
-    <!-- Panel: Courses -->
+    <!-- Panel: Courses (הוחלף לתוכן של קוד 2) -->
     <section id="panel-courses" class="panel" role="tabpanel" aria-labelledby="tab-courses">
-      <h3 class="section-title">קורסים והרצאות השראה</h3>
+      <h3 class="section-title">קורסים והרצאות</h3>
 
-      <div class="accordion" id="accordion">
-        <div class="acc-item">
-          <button class="acc-btn" type="button" aria-expanded="false">
-            <div class="acc-head">
-              <div class="acc-title">AI MASTERY</div>
-              <div class="acc-subtitle">שליטה מעשית בכלי AI לעבודה היומיומית</div>
-            </div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-            </div>
-          </button>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              קורס יישומי להתמודדות יומיומית עם כלי בינה מלאכותית, יצירת תוצרים איכותיים ובניית תהליכי עבודה חכמים.
-            </div>
-          </div>
+      <div class="cards" style="margin-top:.75rem;">
+        <div class="service-item">
+          <div class="service-emoji">✨</div>
+          <div class="service-text">הרצאות השראה</div>
         </div>
 
-        <div class="acc-item">
-          <button class="acc-btn" type="button" aria-expanded="false">
-            <div class="acc-head">
-              <div class="acc-title">סדנאות והרצאות לארגונים</div>
-              <div class="acc-subtitle">AI פרקטי שמייעל עבודה וחוסך זמן</div>
-            </div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-            </div>
-          </button>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              סדנאות יישומיות להטמעת AI בארגון, עם כלים פשוטים ללא צורך בידע טכני.
-            </div>
-          </div>
+        <div class="service-item">
+          <div class="service-emoji">🏢</div>
+          <div class="service-text">סדנאות והרצאות לארגונים</div>
         </div>
 
-        <div class="acc-item">
-          <button class="acc-btn" type="button" aria-expanded="false">
-            <div class="acc-head">
-              <div class="acc-title">סדנאות והרצאות לצוותי חינוך</div>
-              <div class="acc-subtitle">שילוב AI בהוראה ובניהול למידה</div>
-            </div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-            </div>
-          </button>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              הכשרות לצוותי חינוך לשילוב אחראי ויישומי של AI בתהליכי הוראה ולמידה.
-            </div>
-          </div>
+        <div class="service-item">
+          <div class="service-emoji">🎓</div>
+          <div class="service-text">סדנאות והרצאות לאנשי חינוך</div>
         </div>
 
-        <div class="acc-item">
-          <button class="acc-btn" type="button" aria-expanded="false">
-            <div class="acc-head">
-              <div class="acc-title">הרצאות השראה</div>
-              <div class="acc-subtitle">מיינדסט, חשיבה, והשראה ליישום חכם של AI</div>
-            </div>
-            <div class="chev" aria-hidden="true">
-              <svg viewBox="0 0 24 24"><path d="M7 10l5 5 5-5z"/></svg>
-            </div>
-          </button>
-          <div class="acc-body">
-            <div class="acc-body-inner">
-              הרצאות השראה שמחברות בין סיפור, חשיבה ותובנות, ומייצרות בהירות וביטחון בשימוש ב-AI.
-            </div>
-          </div>
+        <div class="service-item">
+          <div class="service-emoji">🚀</div>
+          <div class="service-text">קורס AI MASTERY</div>
         </div>
-      </div>
 
-      <div class="cta">
-        <a href="https://wa.me/972543675502" target="_blank" rel="noopener">
-          <span class="cta-ic" aria-hidden="true">
-            <svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.66 15.02L2 22l5.16-1.3A10 10 0 1 0 12 2zm0 18a8 8 0 0 1-4.07-1.11l-.29-.17-3.06.77.82-2.98-.19-.31A8 8 0 1 1 12 20z"/></svg>
-          </span>
-          לפרטים והתאמה
-        </a>
-      </div>
-    </section>
-
-    <!-- Panel: About -->
-    <section id="panel-about" class="panel" role="tabpanel" aria-labelledby="tab-about">
-      <h3 class="section-title">קצת עלי</h3>
-
-      <div class="glass-card" style="text-align:right;">
-        מהנדסת תעשייה וניהול (B.Sc, טכניון) מומחית ליישום פתרונות בינה מלאכותית.<br />
-        בעלת ניסיון מעשי בפיתוח פתרונות AI ובהדרכת צוותים מקצועיים.<br />
-        מעל עשור של ניסיון בניתוח ושיפור תהליכים, דאטה ו־BI.<br />
-        בעלת גישה פרקטית שמנגישה את עולם ה-AI בצורה ברורה, אפקטיבית ושימושית.
+        <div class="service-item">
+          <div class="service-emoji">🧪</div>
+          <div class="service-text">מעבדות דמיון</div>
+        </div>
       </div>
 
       <div class="cta">
@@ -703,7 +589,6 @@
         panel.classList.toggle('active', panel.id === targetId);
       });
 
-      // Scroll a bit up for nicer UX on mobile
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
@@ -711,23 +596,11 @@
       btn.addEventListener('click', () => activateTab(btn.dataset.target));
     });
 
-    // Accordion (toggle each independently, default all closed)
-    const accItems = document.querySelectorAll('.acc-item');
-
-    accItems.forEach(item => {
-      const btn = item.querySelector('.acc-btn');
-      btn.addEventListener('click', () => {
-        const willOpen = !item.classList.contains('open');
-        item.classList.toggle('open', willOpen);
-        btn.setAttribute('aria-expanded', willOpen ? 'true' : 'false');
-      });
-    });
-
     // Default state
-    activateTab('panel-tools'); // ברירת מחדל: כלים ומדריכים
+    activateTab('panel-tools');
   </script>
 </body>
 </html>
+```
 
-
-
+אם תרצי שהרשימה בטאב “קורסים והרצאות” תהיה גם לחיצה שמרחיבה טקסט (כמו שהיה באקורדיון), תגידי לי ואני אוסיף לזה תיאור קצר לכל פריט בלי לגעת בטאב “כלים”.
