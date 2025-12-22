@@ -315,6 +315,45 @@
       h2{font-size:1rem;}
       .segmented button{font-size:.95rem;}
     }
+      /* About bullets */
+    .about{
+      text-align:right;
+    }
+
+    .about-list{
+      list-style:none;
+      padding:0;
+      margin:0;
+    }
+
+    .about-list li{
+      display:flex;
+      align-items:flex-start;
+      gap:10px;
+      margin-bottom:14px;
+      line-height:1.85;
+    }
+
+    .about-list li:last-child{
+      margin-bottom:0;
+    }
+
+    .bullet{
+      color:#7dd3fc;
+      font-weight:700;
+      line-height:1;
+      margin-top:2px;
+      flex:0 0 auto;
+    }
+
+    @media (max-width: 480px){
+      .about-list li{
+        gap:8px;
+        line-height:1.95;
+        font-size:0.97rem;
+      }
+    }
+
   </style>
 </head>
 
@@ -662,6 +701,7 @@
   </script>
 </body>
 </html>
+
 
 
 
